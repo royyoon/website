@@ -2,7 +2,7 @@
   "name": "website",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://royyoon.github.io/website",
+  "homepage": "https://royyoon.com",
   "type": "module",
   "scripts": {
     "dev": "vite",

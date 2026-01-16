@@ -4,5 +4,6 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/website/',
+  // Custom domain serves from root, so we remove the /website/ base or set to '/'
+  base: '/',
 })
