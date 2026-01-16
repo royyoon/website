@@ -10,8 +10,11 @@ import {
   Sparkles,
   Trophy,
   Users,
-  ExternalLink
+  ExternalLink,
+  FileText
 } from "lucide-react";
+
+import articles from "./data/articles.json";
 
 import profileImg from "./assets/images/profile.png";
 import heroBg from "./assets/images/hero-bg.png";
@@ -222,6 +225,7 @@ export default function App() {
 
           <nav className="hidden md:flex items-center gap-1">
             <NavLink href="#about" label="About" />
+            <NavLink href="#insights" label="Insights" />
             <NavLink href="#work" label="Work" />
             <NavLink href="#projects" label="Projects" />
             <NavLink href="#life" label="Life" />
@@ -352,6 +356,22 @@ export default function App() {
                   You’ll find me lifting early, cooking something spicy, playing golf, or nerding out on cards
                   and collectibles with my kid.
                 </Card>
+              </div>
+            </Section>
+
+            {/* Insights Section */}
+            <Section id="insights" title="Insights" icon={FileText}>
+              <div className="grid md:grid-cols-2 gap-6">
+                {articles.map((article) => (
+                  <Card
+                    key={article.id}
+                    title={article.title}
+                    subtitle={article.date}
+                    tags={article.tags}
+                  >
+                    <div className="whitespace-pre-line">{article.content}</div>
+                  </Card>
+                ))}
               </div>
             </Section>
 
