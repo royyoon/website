@@ -15,9 +15,14 @@ ARTICLES_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__f
 NEWS_API_KEY = os.environ.get("NEWS_API_KEY")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
+
+
+print("Checking API keys...")
+
 def fetch_market_news():
     """Fetches high-level market and AI news."""
     if not NEWS_API_KEY:
+        print("Warning: NewsAPI Key missing. Simulating news data.")
         return "NewsAPI Key missing. Simulating news data."
         
     url = "https://newsapi.org/v2/everything"
@@ -38,8 +43,10 @@ def fetch_market_news():
         for i, art in enumerate(articles[:3]):
             summary += f"- {art['title']}: {art['description']}\n"
             
+        print(f"Fetched {len(articles)} articles.")
         return summary if summary else "No recent news found."
     except Exception as e:
+        print(f"Error fetching news: {e}")
         return f"Error fetching news: {e}"
 
 def generate_article(news_summary):
@@ -68,14 +75,16 @@ def generate_article(news_summary):
     """
     
     prompt = PromptTemplate(template=template, input_variables=["news_summary"])
-    llm = ChatOpenAI(model_name="gpt-4", temperature=0.7)
+    llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.7)
     chain = prompt | llm | StrOutputParser()
     
     try:
+        print("Generating article with AI...")
         result = chain.invoke({"news_summary": news_summary})
         # Clean up potential markdown formatting in the response if the LLM wraps it in ```json ... ```
         cleaned_result = result.replace("```json", "").replace("```", "").strip()
-        return json.loads(cleaned_result)
+        parsed = json.loads(cleaned_result)
+        return parsed
     except Exception as e:
         print(f"Error generating article: {e}")
         return None
