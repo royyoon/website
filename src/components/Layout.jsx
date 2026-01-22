@@ -96,7 +96,7 @@ export default function Layout({ children }) {
                             href={`mailto:${profile.contact.email}`}
                             className="hover:scale-105 transition-transform"
                         >
-                            <img src={sayHiBtn} alt="Say hi" className="h-14 md:h-20 w-auto rounded-full" />
+                            <img src={sayHiBtn} alt="Say hi" className="h-16 md:h-24 w-auto rounded-full" />
                         </a>
                     </div>
                 </div>
