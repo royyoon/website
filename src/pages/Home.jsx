@@ -150,14 +150,18 @@ export default function Home() {
                 <Section id="insights" title="Insights" icon={FileText}>
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
                         {recentArticles.map((article) => (
-                            <Card
-                                key={article.id}
-                                title={article.title}
-                                subtitle={article.date}
-                                tags={article.tags}
-                            >
-                                <div className="whitespace-pre-line line-clamp-4">{article.content}</div>
-                            </Card>
+                            <Link to={`/insights/${article.id}`} key={article.id} className="block group transition-transform hover:-translate-y-1">
+                                <Card
+                                    title={article.title}
+                                    subtitle={article.date}
+                                    tags={article.tags}
+                                >
+                                    <div className="whitespace-pre-line line-clamp-4 text-white/80">{article.content}</div>
+                                    <div className="mt-4 text-sm font-medium text-blue-400 group-hover:text-blue-300 flex items-center gap-1">
+                                        Read full article <ArrowRight className="h-4 w-4" />
+                                    </div>
+                                </Card>
+                            </Link>
                         ))}
                     </div>
                     <div className="flex justify-center">

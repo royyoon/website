@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FileText, Search, ArrowUpDown } from "lucide-react";
+import { FileText, Search, ArrowUpDown, ArrowRight } from "lucide-react";
 import articles from "../data/articles.json";
 import { Card, Pill } from "../components/ui";
 
@@ -74,14 +75,18 @@ export default function Insights() {
                 <div className="grid gap-6">
                     {filteredArticles.length > 0 ? (
                         filteredArticles.map((article) => (
-                            <Card
-                                key={article.id}
-                                title={article.title}
-                                subtitle={article.date}
-                                tags={article.tags}
-                            >
-                                <div className="whitespace-pre-line">{article.content}</div>
-                            </Card>
+                            <Link to={`/insights/${article.id}`} key={article.id} className="block group transition-transform hover:-translate-y-1">
+                                <Card
+                                    title={article.title}
+                                    subtitle={article.date}
+                                    tags={article.tags}
+                                >
+                                    <div className="whitespace-pre-line line-clamp-4 text-white/80">{article.content}</div>
+                                    <div className="mt-4 text-sm font-medium text-blue-400 group-hover:text-blue-300 flex items-center gap-1">
+                                        Read full article <ArrowRight className="h-4 w-4" />
+                                    </div>
+                                </Card>
+                            </Link>
                         ))
                     ) : (
                         <div className="text-center py-20 border border-white/5 rounded-3xl bg-white/5">
